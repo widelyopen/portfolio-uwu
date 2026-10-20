@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
+import { badgeIcon, type Badge } from "../lib/badges";
 
-export interface Badge {
-  icon: string;
-  label: string;
-}
-
-// Best-effort: badges aren't part of Lanyard, so this asks a public profile proxy.
-// If it's down or the shape changes, the page just skips them.
+// Best-effort: a public profile proxy knows the badges that aren't flags (Nitro,
+// Server Booster, ...). If it's down or the shape changes, the page falls back to flag badges.
 export function useBadges(userId: string): Badge[] {
   const [badges, setBadges] = useState<Badge[]>([]);
 
@@ -20,7 +16,7 @@ export function useBadges(userId: string): Badge[] {
           json.badges
             .filter((b: { icon?: string }) => b.icon)
             .map((b: { icon: string; description?: string }) => ({
-              icon: `https://cdn.discordapp.com/badge-icons/${b.icon}.png`,
+              icon: badgeIcon(b.icon),
               label: b.description ?? "",
             })),
         );

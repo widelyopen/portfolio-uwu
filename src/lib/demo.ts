@@ -8,7 +8,7 @@ const art =
   );
 
 export const demoData: LanyardData = {
-  discord_user: { id: "0", username: "qio", avatar: null, global_name: "Qio" },
+  discord_user: { id: "0", username: "qio", avatar: null, global_name: "Qio", public_flags: (1 << 6) | (1 << 17) | (1 << 22) },
   discord_status: "dnd",
   activities: [
     { id: "c", name: "Custom Status", type: 4, state: "fixing one more thing", emoji: { name: "🌑" } },

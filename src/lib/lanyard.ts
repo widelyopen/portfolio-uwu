@@ -32,6 +32,7 @@ export interface LanyardData {
     username: string;
     avatar: string | null;
     global_name: string | null;
+    public_flags?: number;
   };
   discord_status: DiscordStatus;
   activities: Activity[];
