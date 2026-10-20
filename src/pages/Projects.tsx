@@ -5,6 +5,7 @@ import "../components/projects.css";
 
 function ProjectCard({ p }: { p: Project }) {
   const [broken, setBroken] = useState(false);
+  const [iconBroken, setIconBroken] = useState(false);
 
   return (
     <article className="project">
@@ -20,7 +21,11 @@ function ProjectCard({ p }: { p: Project }) {
 
       <div className="info">
         <h3 className="p-title">
-          <StainIcon width="26" height="26" />
+          {p.icon && !iconBroken ? (
+            <img className="p-icon" src={p.icon} alt="" onError={() => setIconBroken(true)} />
+          ) : (
+            <StainIcon width="26" height="26" />
+          )}
           {p.name}
         </h3>
         <p className="p-desc">{p.description}</p>
