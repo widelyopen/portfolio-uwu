@@ -1,0 +1,286 @@
+/* Let the page scroll; the profile fills the first screen. */
+html,
+body {
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.stage {
+  min-height: 100svh;
+  position: relative;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: inherit;
+  opacity: 0.55;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  animation: hint-bob 2s ease-in-out infinite;
+}
+.scroll-hint:hover {
+  opacity: 1;
+}
+@keyframes hint-bob {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 6px);
+  }
+}
+
+.music {
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  padding: 4rem 1.5rem 6rem;
+  box-sizing: border-box;
+}
+.music-inner {
+  width: min(100%, 53rem);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+.eyebrow::before {
+  content: "";
+  width: 1.25rem;
+  height: 1px;
+  background: currentColor;
+}
+.music-title {
+  margin: 0 0 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.music-sub {
+  margin: 0 0 2rem;
+  max-width: 16rem;
+  line-height: 1.5;
+  opacity: 0.65;
+}
+.music-sub.since {
+  max-width: none;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.85rem;
+}
+.music-empty {
+  opacity: 0.6;
+}
+
+/* tabs */
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.25rem;
+  padding: 0.35rem;
+  margin-bottom: 2rem;
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.tabs button {
+  appearance: none;
+  border: 0;
+  padding: 0.8rem 0.5rem;
+  border-radius: 0.65rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  opacity: 0.55;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+.tabs button:hover {
+  opacity: 0.85;
+}
+.tabs button.on {
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0.9;
+}
+
+/* album grid */
+.covers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.cover {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+.cover:hover img {
+  transform: scale(1.05);
+}
+.cover .noart {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 0.75rem;
+  text-align: center;
+  font-weight: 600;
+  opacity: 0.7;
+}
+.cover .cap {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.5rem 0.75rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.cover:hover .cap,
+.cover:focus-visible .cap {
+  opacity: 1;
+}
+.cap b,
+.cap i {
+  font-style: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cap b {
+  font-size: 0.85rem;
+}
+.cap i {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+.skel {
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* track / favourite / artist lists */
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.rows a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+.rows a:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+.rank {
+  width: 1.5rem;
+  text-align: right;
+  opacity: 0.45;
+  font-variant-numeric: tabular-nums;
+}
+.txt {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.txt b,
+.txt i {
+  font-style: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.txt i {
+  font-size: 0.85rem;
+  opacity: 0.65;
+}
+.plays {
+  font-size: 0.8rem;
+  opacity: 0.55;
+  white-space: nowrap;
+}
+
+/* stats */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.stat {
+  padding: 1.25rem 1rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.stat b {
+  font-size: 1.6rem;
+  font-variant-numeric: tabular-nums;
+}
+.stat i {
+  font-style: normal;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+.mini {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+@media (max-width: 640px) {
+  .covers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tabs button {
+    padding: 0.7rem 0.25rem;
+    font-size: 0.85rem;
+  }
+}
