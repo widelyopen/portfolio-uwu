@@ -7,12 +7,8 @@ export const config = {
 
   name: "Qio",
 
-  // Lines the prompt types out in a loop.
-  terminal: ["python bot.py", "git push origin main", "systemctl restart miami", "psql qiodb"],
   tagline: "I build Discord bots and run the servers they live in.",
 
-  // Optional banner image URL for the profile card. Leave empty for the default dusk gradient.
-  banner: "",
 
   about: [
     "Mostly Python with discord.py and PostgreSQL, hosted on an Ubuntu VPS. I manage a handful of Discord communities, so most of what I build starts as something one of them needed.",

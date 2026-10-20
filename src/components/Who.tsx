@@ -1,7 +1,6 @@
 import { config } from "../config";
 import type { ConnectionState } from "../hooks/useLanyard";
 import type { Badge } from "../hooks/useProfile";
-import { useScramble, useTyped } from "../hooks/useTyped";
 import { STATUS_LABEL, avatarUrl, emojiUrl, type LanyardData } from "../lib/lanyard";
 
 function where(d: LanyardData): string {
@@ -25,10 +24,7 @@ export function Who({
   const status = data?.discord_status ?? "offline";
   const custom = data?.activities.find((a) => a.type === 4);
   const emojiSrc = custom?.emoji ? emojiUrl(custom.emoji) : null;
-
-  const name = (data?.discord_user.global_name ?? config.name).toLowerCase();
-  const shownName = useScramble(name);
-  const typed = useTyped(config.terminal);
+  const name = data?.discord_user.global_name ?? config.name;
 
   return (
     <aside className="who">
@@ -39,7 +35,7 @@ export function Who({
         <div>
           <p className="presence">
             <span className="dot" data-status={status} />
-            {STATUS_LABEL[status].toLowerCase()}
+            {STATUS_LABEL[status]}
             {status !== "offline" && data ? where(data) : ""}
           </p>
           {custom && (
@@ -52,14 +48,7 @@ export function Who({
         </div>
       </div>
 
-      <h1 className="name" aria-label={name}>
-        {shownName}
-      </h1>
-
-      <p className="term" aria-hidden="true">
-        <span className="prompt">~/{name} $</span> {typed}
-        <span className="caret" />
-      </p>
+      <h1 className="name">{name}</h1>
 
       <p className="tagline">{config.tagline}</p>
 
@@ -86,13 +75,13 @@ export function Who({
         </p>
       ))}
 
-      <p className="stack">{config.stack.join(" / ")}</p>
+      <p className="stack">{config.stack.join(", ")}</p>
 
       <ul className="links">
         {config.links.map((l) => (
           <li key={l.label}>
             <a href={l.href} target="_blank" rel="noreferrer">
-              {l.label.toLowerCase()}
+              {l.label}
             </a>
           </li>
         ))}
