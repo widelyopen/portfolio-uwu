@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLastfm, type Item } from "../hooks/useLastfm";
+import { Thumb } from "./Thumb";
 import "./music.css";
 
 type Tab = "albums" | "tracks" | "favourite" | "stats";
@@ -20,6 +21,7 @@ function TrackList({ items, showPlays }: { items: Item[]; showPlays: boolean }) 
         <li key={t.url || t.name + i}>
           <a href={t.url} target="_blank" rel="noreferrer">
             <span className="rank">{i + 1}</span>
+            <Thumb artist={t.artist} track={t.name} image={t.image} />
             <span className="txt">
               <b>{t.name}</b>
               <i>{t.artist}</i>
@@ -120,6 +122,7 @@ export function Music() {
                 <li key={a.url || a.name}>
                   <a href={a.url} target="_blank" rel="noreferrer">
                     <span className="rank">{i + 1}</span>
+                    <Thumb artist={a.name} round />
                     <span className="txt">
                       <b>{a.name}</b>
                     </span>
