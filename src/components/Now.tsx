@@ -9,7 +9,7 @@ export function Now({ data }: { data: LanyardData | null }) {
 
   return (
     <section className="now">
-      <h2>Right now</h2>
+      <h2>// right now</h2>
       {spotify && <SpotifyBlock spotify={spotify} />}
       {others.map((a) => (
         <ActivityRow key={a.id} activity={a} />

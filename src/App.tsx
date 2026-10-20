@@ -3,6 +3,7 @@ import { config } from "./config";
 import { useLanyard } from "./hooks/useLanyard";
 import { useProfile } from "./hooks/useProfile";
 import { Backdrop } from "./components/Backdrop";
+import { GridBackground } from "./components/GridBackground";
 import { Who } from "./components/Who";
 import { Now } from "./components/Now";
 
@@ -19,12 +20,13 @@ export default function App() {
   return (
     <>
       <Backdrop banner={profile.banner} art={art} />
+      <GridBackground />
       <main className="layout">
         <Who data={data} state={state} badges={profile.badges} />
         <div className="feed">
           <Now data={data} />
           <section className="work">
-            <h2>Projects</h2>
+            <h2>// projects</h2>
             <ul>
               {config.projects.map((p) => {
                 const inner = (

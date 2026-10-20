@@ -1,6 +1,7 @@
 import { config } from "../config";
 import type { ConnectionState } from "../hooks/useLanyard";
 import type { Badge } from "../hooks/useProfile";
+import { useScramble, useTyped } from "../hooks/useTyped";
 import { STATUS_LABEL, avatarUrl, emojiUrl, type LanyardData } from "../lib/lanyard";
 
 function where(d: LanyardData): string {
@@ -25,6 +26,10 @@ export function Who({
   const custom = data?.activities.find((a) => a.type === 4);
   const emojiSrc = custom?.emoji ? emojiUrl(custom.emoji) : null;
 
+  const name = (data?.discord_user.global_name ?? config.name).toLowerCase();
+  const shownName = useScramble(name);
+  const typed = useTyped(config.terminal);
+
   return (
     <aside className="who">
       <div className="who-top">
@@ -47,7 +52,15 @@ export function Who({
         </div>
       </div>
 
-      <h1 className="name">{data?.discord_user.global_name ?? config.name}</h1>
+      <h1 className="name" aria-label={name}>
+        {shownName}
+      </h1>
+
+      <p className="term" aria-hidden="true">
+        <span className="prompt">~/{name} $</span> {typed}
+        <span className="caret" />
+      </p>
+
       <p className="tagline">{config.tagline}</p>
 
       {state === "missing" && !data && (
@@ -73,13 +86,13 @@ export function Who({
         </p>
       ))}
 
-      <p className="stack">{config.stack.join(", ")}</p>
+      <p className="stack">{config.stack.join(" / ")}</p>
 
       <ul className="links">
         {config.links.map((l) => (
           <li key={l.label}>
             <a href={l.href} target="_blank" rel="noreferrer">
-              {l.label}
+              {l.label.toLowerCase()}
             </a>
           </li>
         ))}

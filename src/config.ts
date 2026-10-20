@@ -6,6 +6,9 @@ export const config = {
   discordId: "244738370213773313",
 
   name: "Qio",
+
+  // Lines the prompt types out in a loop.
+  terminal: ["python bot.py", "git push origin main", "systemctl restart miami", "psql qiodb"],
   tagline: "I build Discord bots and run the servers they live in.",
 
   // Optional banner image URL for the profile card. Leave empty for the default dusk gradient.
