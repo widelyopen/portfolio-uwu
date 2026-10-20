@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 
-// Tiny History API router: "/" is home, "/projects" and "/music" are pages.
+// Tiny History API router: "/" is home; other named routes are pages.
 // Add a name + path here for each new page.
-export type Route = "home" | "projects" | "music";
+export type Route = "home" | "projects" | "music" | "social";
 
 const PATHS: Record<Route, string> = {
   home: "/",
   projects: "/projects",
   music: "/music",
+  social: "/social",
 };
 
 export function pathFor(route: Route): string {

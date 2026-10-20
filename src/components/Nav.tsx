@@ -1,6 +1,6 @@
 import type { ComponentType, MouseEvent, SVGProps } from "react";
 import { navigate, pathFor, type Route } from "../hooks/useRoute";
-import { FolderIcon, HomeIcon, MusicIcon } from "./icons";
+import { FolderIcon, HomeIcon, MusicIcon, SocialIcon } from "./icons";
 import "./nav.css";
 
 type Item = {
@@ -14,6 +14,7 @@ const ITEMS: Item[] = [
   { id: "home", label: "Home", Icon: HomeIcon },
   { id: "projects", label: "Projects", Icon: FolderIcon },
   { id: "music", label: "Music", Icon: MusicIcon },
+  { id: "social", label: "Social", Icon: SocialIcon },
 ];
 
 function go(e: MouseEvent<HTMLAnchorElement>, to: Route) {

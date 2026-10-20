@@ -8,6 +8,7 @@ import { Nav } from "./components/Nav";
 import { Home } from "./pages/Home";
 import { Music } from "./pages/Music";
 import { Projects } from "./pages/Projects";
+import { Social } from "./pages/Social";
 
 export default function App() {
   const route = useRoute();
@@ -29,6 +30,8 @@ export default function App() {
         <Music />
       ) : route === "projects" ? (
         <Projects />
+      ) : route === "social" ? (
+        <Social />
       ) : (
         <Home data={data} state={state} badges={badges} />
       )}
