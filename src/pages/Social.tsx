@@ -1,26 +1,54 @@
+import { useState } from "react";
 import { ChevronIcon, DiscordIcon, TelegramIcon, WspIcon } from "../components/icons";
 import { socials, type SocialLink } from "../lib/social";
 import "../components/social.css";
 
 function IconFor({ name }: { name: string }) {
-  if (name === "Discord") return <DiscordIcon width="22" height="22" />;
-  if (name === "Telegram") return <TelegramIcon width="22" height="22" />;
-  return <WspIcon width="22" height="22" />;
+  if (name === "Discord") return <DiscordIcon width="26" height="26" />;
+  if (name === "Telegram") return <TelegramIcon width="26" height="26" />;
+  return <WspIcon width="26" height="26" />;
 }
 
 function SocialCard({ s }: { s: SocialLink }) {
+  const localBanner = s.accent ? `/social/${s.accent}.svg` : undefined;
+  const [src, setSrc] = useState(s.image ?? localBanner);
+
   return (
-    <a className="social-link" href={s.url} target="_blank" rel="noreferrer">
-      <span className="social-ico" aria-hidden="true">
-        <IconFor name={s.name} />
-      </span>
-      <span className="social-meta">
-        <p className="social-name">{s.name}</p>
-        <p className="social-handle">{s.handle}</p>
-        <p className="social-desc">{s.description}</p>
-      </span>
-      <ChevronIcon className="social-arrow" width="18" height="18" />
-    </a>
+    <article className="social-card">
+      <div className="social-shot" data-accent={s.accent}>
+        {src ? (
+          <img
+            src={src}
+            alt=""
+            loading="lazy"
+            onError={() => {
+              // Prefer the local SVG banner, then the typographic placeholder.
+              if (localBanner && src !== localBanner) setSrc(localBanner);
+              else setSrc(undefined);
+            }}
+          />
+        ) : (
+          <div className="social-shot-ph" aria-hidden="true">
+            {s.name}
+          </div>
+        )}
+      </div>
+
+      <div className="social-info">
+        <h3 className="social-card-title">
+          <IconFor name={s.name} />
+          {s.name}
+        </h3>
+        <p className="social-card-handle">{s.handle}</p>
+        <p className="social-card-desc">{s.description}</p>
+        <div className="social-card-links">
+          <a className="social-open" href={s.url} target="_blank" rel="noreferrer">
+            open
+            <ChevronIcon width="16" height="16" />
+          </a>
+        </div>
+      </div>
+    </article>
   );
 }
 
