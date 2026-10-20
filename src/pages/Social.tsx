@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronIcon, DiscordIcon, TelegramIcon, WspIcon } from "../components/icons";
+import { useSocialBanner } from "../hooks/useSocialBanner";
 import { socials, type SocialLink } from "../lib/social";
 import "../components/social.css";
 
@@ -10,23 +11,23 @@ function IconFor({ name }: { name: string }) {
 }
 
 function SocialCard({ s }: { s: SocialLink }) {
-  const localBanner = s.accent ? `/social/${s.accent}.svg` : undefined;
-  const [src, setSrc] = useState(s.image ?? localBanner);
+  const banner = useSocialBanner(s);
+  const [broken, setBroken] = useState(false);
+  const showImg = banner && !broken;
+
+  useEffect(() => {
+    setBroken(false);
+  }, [banner?.url]);
 
   return (
     <article className="social-card">
-      <div className="social-shot" data-accent={s.accent}>
-        {src ? (
-          <img
-            src={src}
-            alt=""
-            loading="lazy"
-            onError={() => {
-              // Prefer the local SVG banner, then the typographic placeholder.
-              if (localBanner && src !== localBanner) setSrc(localBanner);
-              else setSrc(undefined);
-            }}
-          />
+      <div
+        className="social-shot"
+        data-accent={s.accent}
+        data-fit={showImg ? banner.fit : undefined}
+      >
+        {showImg ? (
+          <img src={banner.url} alt="" loading="lazy" onError={() => setBroken(true)} />
         ) : (
           <div className="social-shot-ph" aria-hidden="true">
             {s.name}
@@ -61,8 +62,8 @@ export function Social() {
         <p className="social-sub">find me around the web</p>
 
         <div className="social-list">
-          {socials.map((s) => (
-            <SocialCard key={s.url} s={s} />
+          {socials.map((link) => (
+            <SocialCard key={link.url} s={link} />
           ))}
         </div>
       </section>

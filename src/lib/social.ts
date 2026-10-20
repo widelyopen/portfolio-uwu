@@ -3,8 +3,13 @@ export type SocialLink = {
   handle: string;
   url: string;
   description: string;
-  image?: string; // banner at the top of the card
-  accent?: "wsp" | "telegram" | "discord"; // tint when no image / as fallback
+  /** Static banner URL (used as-is, e.g. wsp OG image). */
+  image?: string;
+  /** Fetch a live banner/icon at runtime via the /api proxies. */
+  fetch?: "discord" | "telegram";
+  /** Invite code (discord) or @username without @ (telegram). */
+  fetchId?: string;
+  accent?: "wsp" | "telegram" | "discord";
 };
 
 export const socials: SocialLink[] = [
@@ -13,7 +18,6 @@ export const socials: SocialLink[] = [
     handle: "@21",
     url: "https://wsp.baby/21",
     description: "bright dreams on wsp.baby",
-    // Live OG banner; falls back to /social/wsp.svg if it fails to load.
     image: "https://wsp.baby/embeds/og/21",
     accent: "wsp",
   },
@@ -22,7 +26,8 @@ export const socials: SocialLink[] = [
     handle: "@evictionletter",
     url: "https://t.me/evictionletter",
     description: "channel & updates",
-    image: "/social/telegram.svg",
+    fetch: "telegram",
+    fetchId: "evictionletter",
     accent: "telegram",
   },
   {
@@ -30,7 +35,8 @@ export const socials: SocialLink[] = [
     handle: "vacations",
     url: "https://discord.gg/vacations",
     description: "join the server",
-    image: "/social/discord.svg",
+    fetch: "discord",
+    fetchId: "vacations",
     accent: "discord",
   },
 ];

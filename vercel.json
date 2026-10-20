@@ -1,3 +1,16 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/api/discord/:path*",
+      "destination": "https://discord.com/api/v10/:path*"
+    },
+    {
+      "source": "/api/telegram/:path*",
+      "destination": "https://t.me/:path*"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
 }
