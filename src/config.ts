@@ -3,6 +3,6 @@ export const config = {
   // You also have to be in the Lanyard server (discord.gg/lanyard) or it can't see your presence.
   discordId: "244738370213773313",
 
-  // Shown until Lanyard loads, and if your account has no display name set.
-  name: "Qio",
+  // The big gradient text on the page.
+  heading: "Hey! I’m mason",
 };

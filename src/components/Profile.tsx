@@ -24,7 +24,6 @@ export function Profile({
   const status = data?.discord_status ?? "offline";
   const custom = data?.activities.find((a) => a.type === 4);
   const emojiSrc = custom?.emoji ? emojiUrl(custom.emoji) : null;
-  const name = data?.discord_user.global_name ?? config.name;
 
   return (
     <section className="profile">
@@ -32,7 +31,7 @@ export function Profile({
         {data ? <img src={avatarUrl(data.discord_user)} alt="" /> : null}
       </div>
 
-      <h1 className="name">{name}</h1>
+      <h1 className="name">{config.heading}</h1>
 
       <p className="presence">
         <span className="dot" data-status={status} />
