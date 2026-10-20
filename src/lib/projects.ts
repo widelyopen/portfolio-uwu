@@ -17,7 +17,7 @@ export const projects: Project[] = [
     icon: "/projects/stains-icon.png",
     // Live screenshot of the site. To use your own, put a file in public/projects/
     // and point this at it, e.g. "/projects/stains.png".
-    image: "https://image.thum.io/get/width/1400/https://stains.rocks/",
+    image: "/projects/preview.png",
   },
 ];
 
