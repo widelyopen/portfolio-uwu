@@ -1,68 +1,55 @@
 import { useEffect } from "react";
 import { config } from "./config";
 import { useLanyard } from "./hooks/useLanyard";
-import { ProfileCard } from "./components/ProfileCard";
+import { useProfile } from "./hooks/useProfile";
+import { Backdrop } from "./components/Backdrop";
+import { Who } from "./components/Who";
+import { Now } from "./components/Now";
 
 export default function App() {
   const { data, state } = useLanyard(config.discordId);
+  const profile = useProfile(config.discordId, config.banner);
 
   useEffect(() => {
     document.documentElement.dataset.status = data?.discord_status ?? "offline";
   }, [data?.discord_status]);
 
+  const art = data?.listening_to_spotify ? (data.spotify?.album_art_url ?? null) : null;
+
   return (
-    <main className="page">
-      <ProfileCard data={data} state={state} />
-
-      <section className="block">
-        <h2>About</h2>
-        {config.about.map((p) => (
-          <p key={p}>{p}</p>
-        ))}
-        <ul className="stack">
-          {config.stack.map((s) => (
-            <li key={s}>{s}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="block">
-        <h2>Projects</h2>
-        <ul className="projects">
-          {config.projects.map((p) => (
-            <li key={p.name}>
-              <div className="project-main">
-                {p.href ? (
-                  <a href={p.href} target="_blank" rel="noreferrer">
-                    {p.name}
-                  </a>
-                ) : (
-                  <span className="project-name">{p.name}</span>
-                )}
-                <p>{p.description}</p>
-              </div>
-              <ul className="tags">
-                {p.tags.map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="block">
-        <h2>Elsewhere</h2>
-        <ul className="links">
-          {config.links.map((l) => (
-            <li key={l.label}>
-              <a href={l.href} target="_blank" rel="noreferrer">
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </main>
+    <>
+      <Backdrop banner={profile.banner} art={art} />
+      <main className="layout">
+        <Who data={data} state={state} badges={profile.badges} />
+        <div className="feed">
+          <Now data={data} />
+          <section className="work">
+            <h2>Projects</h2>
+            <ul>
+              {config.projects.map((p) => {
+                const inner = (
+                  <>
+                    <span className="work-name">{p.name}</span>
+                    <span className="work-desc">{p.description}</span>
+                    <span className="work-tags muted small">{p.tags.join(", ")}</span>
+                  </>
+                );
+                return (
+                  <li key={p.name}>
+                    {p.href ? (
+                      <a className="work-row" href={p.href} target="_blank" rel="noreferrer">
+                        {inner}
+                      </a>
+                    ) : (
+                      <div className="work-row">{inner}</div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        </div>
+      </main>
+    </>
   );
 }

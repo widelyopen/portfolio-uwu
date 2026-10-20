@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import type { LanyardData } from "../lib/lanyard";
+import { demoData } from "../lib/demo";
+
+const DEMO = typeof location !== "undefined" && new URLSearchParams(location.search).has("demo");
 
 export type ConnectionState = "connecting" | "live" | "missing";
 
@@ -9,10 +12,11 @@ const REST_URL = "https://api.lanyard.rest/v1/users";
 // Live presence over Lanyard's WebSocket, with a REST fetch for a fast first paint
 // and exponential-backoff reconnects.
 export function useLanyard(userId: string) {
-  const [data, setData] = useState<LanyardData | null>(null);
-  const [state, setState] = useState<ConnectionState>("connecting");
+  const [data, setData] = useState<LanyardData | null>(DEMO ? demoData : null);
+  const [state, setState] = useState<ConnectionState>(DEMO ? "live" : "connecting");
 
   useEffect(() => {
+    if (DEMO) return;
     let ws: WebSocket | null = null;
     let heartbeat: number | undefined;
     let retry: number | undefined;
