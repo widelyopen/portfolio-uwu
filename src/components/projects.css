@@ -1,0 +1,153 @@
+/* Scrolls inside its own container; left padding leaves room for the side navbar. */
+.projects-page {
+  height: 100svh;
+  overflow-y: auto;
+  padding-left: 5rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+.pj-inner {
+  width: min(100%, 53rem);
+  padding: 4rem 1.5rem 6rem;
+  box-sizing: border-box;
+}
+
+.pj-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+.pj-eyebrow::before {
+  content: "";
+  width: 1.25rem;
+  height: 1px;
+  background: currentColor;
+}
+.pj-title {
+  margin: 0 0 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.pj-sub {
+  margin: 0 0 2rem;
+  line-height: 1.5;
+  opacity: 0.65;
+}
+.pj-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* project card */
+.project {
+  position: relative;
+  border-radius: 1.1rem;
+  overflow: hidden;
+  background: #07080d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.project:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.shot {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: radial-gradient(120% 90% at 30% 20%, #1a2352 0%, #0a0d1f 55%, #07080d 100%);
+}
+.shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+.shot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(7, 8, 13, 0) 40%, #07080d 100%);
+  pointer-events: none;
+}
+.shot-ph {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  opacity: 0.12;
+}
+
+.info {
+  position: relative;
+  margin-top: -7.5rem;
+  padding: 0 1.5rem 1.4rem;
+  display: grid;
+  gap: 0.6rem;
+}
+.p-title {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.p-desc {
+  margin: 0;
+  opacity: 0.85;
+}
+.p-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+.p-view,
+.p-join {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+}
+.p-view:hover,
+.p-join:hover,
+.p-view:focus-visible,
+.p-join:focus-visible {
+  opacity: 1;
+}
+/* make the whole card clickable through "view project" */
+.p-view::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.p-join {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 640px) {
+  .projects-page {
+    padding-left: 0;
+    padding-bottom: 5.5rem;
+  }
+  .info {
+    padding: 0 1rem 1.1rem;
+  }
+}

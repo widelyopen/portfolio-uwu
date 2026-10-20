@@ -1,6 +1,6 @@
 import type { ComponentType, MouseEvent, SVGProps } from "react";
 import { navigate, pathFor, type Route } from "../hooks/useRoute";
-import { HomeIcon, MusicIcon } from "./icons";
+import { FolderIcon, HomeIcon, MusicIcon } from "./icons";
 import "./nav.css";
 
 type Item = {
@@ -12,6 +12,7 @@ type Item = {
 // To add a page: add it to Route + PATHS in useRoute.ts, an icon in icons.tsx, and an entry here.
 const ITEMS: Item[] = [
   { id: "home", label: "Home", Icon: HomeIcon },
+  { id: "projects", label: "Projects", Icon: FolderIcon },
   { id: "music", label: "Music", Icon: MusicIcon },
 ];
 

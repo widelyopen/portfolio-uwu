@@ -7,6 +7,7 @@ import { flagBadges } from "./lib/badges";
 import { Nav } from "./components/Nav";
 import { Home } from "./pages/Home";
 import { Music } from "./pages/Music";
+import { Projects } from "./pages/Projects";
 
 export default function App() {
   const route = useRoute();
@@ -24,7 +25,13 @@ export default function App() {
   return (
     <>
       <Nav route={route} />
-      {route === "music" ? <Music /> : <Home data={data} state={state} badges={badges} />}
+      {route === "music" ? (
+        <Music />
+      ) : route === "projects" ? (
+        <Projects />
+      ) : (
+        <Home data={data} state={state} badges={badges} />
+      )}
     </>
   );
 }
