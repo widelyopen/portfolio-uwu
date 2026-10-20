@@ -4,6 +4,7 @@ import { useLanyard } from "./hooks/useLanyard";
 import { useBadges } from "./hooks/useProfile";
 import { flagBadges } from "./lib/badges";
 import { Profile } from "./components/Profile";
+import { Activity } from "./components/Activity";
 
 export default function App() {
   const { data, state } = useLanyard(config.discordId);
@@ -17,8 +18,15 @@ export default function App() {
   }, [data?.discord_status]);
 
   return (
-    <main className="stage">
-      <Profile data={data} state={state} badges={badges} />
-    </main>
+    <>
+      <main className="stage">
+        <Profile data={data} state={state} badges={badges} />
+        <a className="scroll-hint" href="#activity">
+          <span>scroll</span>
+          <span aria-hidden="true">↓</span>
+        </a>
+      </main>
+      <Activity data={data} />
+    </>
   );
 }
