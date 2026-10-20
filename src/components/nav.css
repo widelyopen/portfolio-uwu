@@ -1,0 +1,72 @@
+.nav {
+  position: fixed;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  background: rgba(10, 10, 10, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.nav a {
+  position: relative;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.7rem;
+  color: inherit;
+  opacity: 0.55;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+.nav a:hover,
+.nav a:focus-visible {
+  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.06);
+}
+.nav a[aria-current="page"] {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* label tooltip on hover */
+.nav a::after {
+  content: attr(data-label);
+  position: absolute;
+  left: calc(100% + 0.75rem);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+.nav a:hover::after,
+.nav a:focus-visible::after {
+  opacity: 1;
+}
+
+/* phones: bottom bar instead of side rail */
+@media (max-width: 640px) {
+  .nav {
+    left: 50%;
+    top: auto;
+    bottom: 1rem;
+    transform: translateX(-50%);
+    flex-direction: row;
+  }
+  .nav a::after {
+    display: none;
+  }
+}
