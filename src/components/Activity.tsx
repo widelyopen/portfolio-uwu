@@ -6,8 +6,8 @@ import "./activity.css";
 type Spotify = {
   song: string;
   artist: string;
-  album: string;
-  album_art_url: string;
+  album: string | null;
+  album_art_url: string | null;
   track_id: string;
   timestamps: { start: number; end: number };
 };
@@ -15,11 +15,11 @@ type Spotify = {
 type Act = {
   type: number;
   name: string;
-  details?: string;
-  state?: string;
-  application_id?: string;
-  timestamps?: { start?: number; end?: number };
-  assets?: { large_image?: string; large_text?: string };
+  details?: string | null;
+  state?: string | null;
+  application_id?: string | null;
+  timestamps?: { start?: number | null; end?: number | null } | null;
+  assets?: { large_image?: string | null; large_text?: string | null } | null;
 };
 
 type Props = {
@@ -84,12 +84,16 @@ export function Activity({ data }: Props) {
             target="_blank"
             rel="noreferrer"
           >
-            <img className="art" src={spotify.album_art_url} alt="" />
+            {spotify.album_art_url ? (
+              <img className="art" src={spotify.album_art_url} alt="" />
+            ) : (
+              <div className="art ph" />
+            )}
             <div className="meta">
               <span className="tag">Listening to Spotify</span>
               <strong className="song">{spotify.song}</strong>
               <span className="sub">by {spotify.artist.split(";").join(", ")}</span>
-              <span className="sub">on {spotify.album}</span>
+              {spotify.album && <span className="sub">on {spotify.album}</span>}
               <div className="bar" aria-hidden="true">
                 <i style={{ width: `${pct}%` }} />
               </div>
