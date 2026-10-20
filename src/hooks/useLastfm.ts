@@ -27,8 +27,11 @@ export type MusicData = {
   stats: Stats;
 };
 
-// Last.fm returns this star image when it has no real cover.
-const PLACEHOLDER = "2a96cbd8b46e442fc41c2b86b9fce40e";
+// Last.fm returns one of these star images when it has no real cover.
+const PLACEHOLDERS = [
+  "2a96cbd8b46e442fc41c2b86b9fce40e", // old star
+  "c6f59c1e5e7240a4c0d427abd71f3dbb", // current star
+];
 
 async function call(method: string, extra: Record<string, string> = {}) {
   const params = new URLSearchParams({
@@ -47,7 +50,7 @@ async function call(method: string, extra: Record<string, string> = {}) {
 function pickImage(images: Array<{ "#text"?: string }> | undefined): string | null {
   if (!images || images.length === 0) return null;
   const src = images[images.length - 1]?.["#text"];
-  if (!src || src.includes(PLACEHOLDER)) return null;
+  if (!src || PLACEHOLDERS.some((h) => src.includes(h))) return null;
   return src;
 }
 

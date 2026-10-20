@@ -21,7 +21,7 @@ function TrackList({ items, showPlays }: { items: Item[]; showPlays: boolean }) 
         <li key={t.url || t.name + i}>
           <a href={t.url} target="_blank" rel="noreferrer">
             <span className="rank">{i + 1}</span>
-            <Thumb artist={t.artist} track={t.name} image={t.image} />
+            <Thumb artist={t.artist} track={t.name} />
             <span className="txt">
               <b>{t.name}</b>
               <i>{t.artist}</i>
