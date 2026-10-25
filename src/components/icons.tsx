@@ -1,6 +1,6 @@
-import type { ReactNode, SVGProps } from "react";
+import type { ReactNode, SVGProps } from "react"; 
 
-// Hand-drawn 24x24 line icons. They inherit the text colour via currentColor.
+// Hand-drawn 24x24 icons. Most are line icons, a few are filled. They inherit the text colour via currentColor.
 function Svg({ children, ...rest }: SVGProps<SVGSVGElement> & { children: ReactNode }) {
   return (
     <svg
@@ -20,32 +20,46 @@ function Svg({ children, ...rest }: SVGProps<SVGSVGElement> & { children: ReactN
   );
 }
 
+// ---- Navbar icons (filled) ----
+
 export function HomeIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <Svg {...props}>
-      <path d="M3 11.5 12 4l9 7.5" />
-      <path d="M5.5 10v9.5a.5.5 0 0 0 .5.5h4v-5.5h4V20h4a.5.5 0 0 0 .5-.5V10" />
+    <Svg {...props} fill="currentColor" stroke="none">
+      <path d="M12 3.2a1 1 0 0 1 .64.23l8 6.7a1 1 0 0 1 .36.77V20a1 1 0 0 1-1 1h-4.5v-6a1 1 0 0 0-1-1h-3a1 1 0 0 0-1 1v6H4a1 1 0 0 1-1-1v-9.1a1 1 0 0 1 .36-.77l8-6.7A1 1 0 0 1 12 3.2Z" />
     </Svg>
   );
 }
 
 export function MusicIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <Svg {...props}>
-      <path d="M9 18V5.5l10-2V16" />
-      <circle cx="6.5" cy="18" r="2.5" />
-      <circle cx="16.5" cy="16" r="2.5" />
+    <Svg {...props} fill="currentColor" stroke="none">
+      <path d="M7.1 5.4 19.5 2.9V16h-2.4V6.4L9.5 8v10H7.1Z" />
+      <circle cx="6.5" cy="18" r="3" />
+      <circle cx="16.5" cy="16" r="3" />
     </Svg>
   );
 }
 
 export function FolderIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <Svg {...props}>
-      <path d="M3.5 7.5A1.5 1.5 0 0 1 5 6h4l2 2.5h8a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 18Z" />
+    <Svg {...props} fill="currentColor" stroke="none">
+      <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h4.6c.4 0 .8.2 1.1.5L12 7.5h7.5A1.5 1.5 0 0 1 21 9v9.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5Z" />
     </Svg>
   );
 }
+
+export function SocialIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Svg {...props} fill="currentColor" stroke="none">
+      <circle cx="7" cy="9" r="3" />
+      <circle cx="17" cy="9" r="3" />
+      <path d="M2.6 19.5C3 16.5 4.8 14.6 7 14.6s4 1.9 4.4 4.9Z" />
+      <path d="M12.6 19.5c.4-3 2.2-4.9 4.4-4.9s4 1.9 4.4 4.9Z" />
+    </Svg>
+  );
+}
+
+// ---- Other icons (unchanged) ----
 
 export function ChatIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -69,17 +83,6 @@ export function StainIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <Svg {...props} fill="currentColor" stroke="none">
       <path d="M12 2.8c3.6 4.3 6.2 7.5 6.2 10.8a6.2 6.2 0 0 1-12.4 0c0-3.3 2.6-6.5 6.2-10.8Z" />
-    </Svg>
-  );
-}
-
-export function SocialIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <Svg {...props}>
-      <circle cx="8" cy="9" r="2.5" />
-      <circle cx="16" cy="9" r="2.5" />
-      <path d="M3.5 18c.6-2.4 2.4-3.5 4.5-3.5s3.9 1.1 4.5 3.5" />
-      <path d="M11.5 18c.6-2.4 2.4-3.5 4.5-3.5s3.9 1.1 4.5 3.5" />
     </Svg>
   );
 }
